@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import logging
+import os
 
 
 CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
@@ -60,4 +61,5 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
