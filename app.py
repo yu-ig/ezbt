@@ -69,9 +69,13 @@ def handle_message(event):
             # )
             #TextSendMessage(text=event.message.text)
         )
-        
+
     else:
-        TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
+        )
+
 
 
 
