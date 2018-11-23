@@ -61,7 +61,7 @@ def handle_message(event):
         # if watchword  dict
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!!')
+            TextSendMessage(text='SUCCESS!!' + dict[ww])
 
             # VideoSendMessage(
             #     original_content_url=dict[ww],
@@ -69,16 +69,7 @@ def handle_message(event):
             # )
             #TextSendMessage(text=event.message.text)
         )
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=dict[ww])
-
-            # VideoSendMessage(
-            #     original_content_url=dict[ww],
-            #     preview_image_url='https://example.com/preview.jpg'
-            # )
-            # TextSendMessage(text=event.message.text)
-        )
+        
     else:
         TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
 
