@@ -14,7 +14,7 @@ import os
 
 
 # 合言葉 dictionary
-dict = {}    # {"id":"URL"}
+dict = {'hi':"おめでとう。"}    # {"id":"URL"}
 
 
 CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
@@ -62,11 +62,22 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='SUCCESS!!')
+
             # VideoSendMessage(
             #     original_content_url=dict[ww],
             #     preview_image_url='https://example.com/preview.jpg'
             # )
             #TextSendMessage(text=event.message.text)
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=dict[ww])
+
+            # VideoSendMessage(
+            #     original_content_url=dict[ww],
+            #     preview_image_url='https://example.com/preview.jpg'
+            # )
+            # TextSendMessage(text=event.message.text)
         )
     else:
         TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
