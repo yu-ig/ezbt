@@ -30,6 +30,7 @@ def index():
     return "Hello world"
 
 
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -46,7 +47,6 @@ def callback():
         abort(400)
 
     return 'OK'
-
 
 
 @handler.add(MessageEvent, message=TextMessage)
