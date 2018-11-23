@@ -7,10 +7,14 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, VideoSendMessage
 )
 import logging
 import os
+
+
+# 合言葉 dictionary
+dict = {}    # {"id":"URL"}
 
 
 CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
@@ -52,14 +56,37 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    ww = event.message.text
+    if ww in dict.keys():
+        # if watchword  dict
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='SUCCESS!!')
+            # VideoSendMessage(
+            #     original_content_url=dict[ww],
+            #     preview_image_url='https://example.com/preview.jpg'
+            # )
+            #TextSendMessage(text=event.message.text)
+        )
+    else:
+        TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
 
 
 
 
 
 if __name__ == "__main__":
+    # 環境変数をゲット　なければセット　
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+
+
+
+
+
+{
+    "type": "video",
+    "originalContentUrl": "https://example.com/original.mp4",
+    "previewImageUrl": "https://example.com/preview.jpg"
+}
