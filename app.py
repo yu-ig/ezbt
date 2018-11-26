@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, VideoSendMessage
+    MessageEvent, TextMessage, VideoMessage, TextSendMessage, VideoSendMessage
 )
 import logging
 import os
@@ -70,7 +70,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=VideoMessage)
 def handle_message(event):
     # 暗号と照合..................
     ww = event.message.text
