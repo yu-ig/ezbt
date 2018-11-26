@@ -94,7 +94,7 @@ def handle_message(event):
             # TextSendMessage(text='SUCCESS!! ' )
 
             VideoSendMessage(
-                original_content_url=urllib3.urlretrieve(url, path)
+                original_content_url=url+path
                 # preview_image_url='https://example.com/preview.jpg'
             )
             #TextSendMessage(text=event.message.text)
