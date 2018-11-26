@@ -76,7 +76,7 @@ def handle_message(event):
     if ww in dict.keys():
         # l = list(NAMES_CHARS)
         # metadata, f = dbx.files_download('/SHARE/'+dict[ww])
-        result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
+        # result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
         # out = open(dict["01"], 'wb')
         # data = f.content
         # out.close()
@@ -88,7 +88,7 @@ def handle_message(event):
         # if watchword  dict
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!! ' + str(result))
+            TextSendMessage(text='SUCCESS!! ' )
 
             # VideoSendMessage(
             #     original_content_url=f
