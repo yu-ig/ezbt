@@ -11,10 +11,17 @@ from linebot.models import (
 )
 import logging
 import os
-
+import dropbox
+import random
+import json
 
 # 合言葉 dictionary
-dict = {'hi':"おめでとう。"}    # {"id":"URL"}
+dict = {'どうが':"おめでとう。"}    # {"WATCHWORD":"URL"}
+
+HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
+                  u"なにぬねのはひふへほまみむめもやゆよ"\
+                  u"らりるれろわをん")
+
 
 
 CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
@@ -30,9 +37,17 @@ logger.setLevel(logging.ERROR)
 
 
 
+DROPBOX_APP_KEY = "eqdo0y9azq27imf"
+DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
+DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
+
+dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+
+
 @app.route('/')
 def index():
     return "Hello world"
+
 
 
 
@@ -56,17 +71,18 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    # 暗号と照合..................
     ww = event.message.text
     if ww in dict.keys():
         # if watchword  dict
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!!' + dict[ww])
+            # TextSendMessage(text='SUCCESS!! ' + dict[ww])
 
-            # VideoSendMessage(
-            #     original_content_url=dict[ww],
-            #     preview_image_url='https://example.com/preview.jpg'
-            # )
+            VideoSendMessage(
+                original_content_url="./data/out4.mp4"
+                # preview_image_url='https://example.com/preview.jpg'
+            )
             #TextSendMessage(text=event.message.text)
         )
 
@@ -77,8 +93,25 @@ def handle_message(event):
         )
 
 
+'''
+ JSON add id
+'''
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
 
 
+
+
+# 文字列を適当に生成するよ。
+def generateWW(length):
+    watchword = ""
+    for i in range(length):
+        n = len(HIRAGANA_LIST)
+        watchword = watchword + HIRAGANA_LIST[random.randint(0, n-1)]
+
+    return watchword
 
 
 if __name__ == "__main__":
