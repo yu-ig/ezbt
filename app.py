@@ -87,7 +87,7 @@ def handle_message(event):
         # print("::: " + str(data))
         # print(len(data), 'bytes; md:', metadata)
         # if watchword  dict
-        url = "https://damp-sands-30274.herokuapp.com/00.mp4"
+        url = "https://damp-sands-30274.herokuapp.com/send/e00.mp4"
         path = '00.mp4'
         mojiretsu = "mojimojimoji"
         line_bot_api.reply_message(
@@ -96,7 +96,7 @@ def handle_message(event):
 
             VideoSendMessage(
                 original_content_url=url,
-                preview_image_url="https://damp-sands-30274.herokuapp.com/0.jpg"
+                preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
             )
             #TextSendMessage(text=event.message.text)
         )
