@@ -91,7 +91,7 @@ def handle_message(event):
         path = '00.mp4'
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!! ' + str(result) )
+            TextSendMessage(text='SUCCESS!! ' + url)
 
             # VideoSendMessage(
             #     original_content_url=url
