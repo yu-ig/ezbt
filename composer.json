@@ -2,6 +2,7 @@
   "scripts": {
     "compile": [
       "chmod -R 777 app/send/",
+      "chmod -R 755 app/"
 
     ]
   }
