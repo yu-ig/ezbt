@@ -90,7 +90,7 @@ def handle_message(event):
             # TextSendMessage(text='SUCCESS!! ' + dict[ww])
 
             VideoSendMessage(
-                original_content_url=out
+                original_content_url=f
                 # preview_image_url='https://example.com/preview.jpg'
             )
             #TextSendMessage(text=event.message.text)
