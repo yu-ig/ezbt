@@ -95,7 +95,7 @@ def handle_message(event):
             # TextSendMessage(text='SUCCESS!! ' + url+path)
 
             VideoSendMessage(
-                original_content_url=url
+                original_content_url='https://www.dropbox.com/s/beqlhwn4y8szbcr/00.mp4?dl=0'
                 # preview_image_url='https://example.com/preview.jpg'
             )
             #TextSendMessage(text=event.message.text)
