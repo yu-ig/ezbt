@@ -87,7 +87,7 @@ def handle_message(event):
         # print("::: " + str(data))
         # print(len(data), 'bytes; md:', metadata)
         # if watchword  dict
-        url = 'https://damp-sands-30274.herokuapp.com/send/00.mp4'
+        url = 'https://damp-sands-30274.herokuapp.com/send/'
         path = '00.mp4'
         mojiretsu = "mojimojimoji"
         line_bot_api.reply_message(
