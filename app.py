@@ -77,7 +77,7 @@ def handle_message(event):
     if ww in dict.keys():
         # l = list(NAMES_CHARS)
         # metadata, f = dbx.files_download('/SHARE/'+dict[ww])
-        # result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
+        result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
         # out = open(dict["01"], 'wb')
         # data = f.content
         # out.close()
@@ -91,12 +91,12 @@ def handle_message(event):
         path = '00.mp4'
         line_bot_api.reply_message(
             event.reply_token,
-            # TextSendMessage(text='SUCCESS!! ' )
+            TextSendMessage(text='SUCCESS!! ' + str(result) )
 
-            VideoSendMessage(
-                original_content_url=url
-                # preview_image_url='https://example.com/preview.jpg'
-            )
+            # VideoSendMessage(
+            #     original_content_url=url
+            #     # preview_image_url='https://example.com/preview.jpg'
+            # )
             #TextSendMessage(text=event.message.text)
         )
         # os.remove(out)
@@ -111,10 +111,10 @@ def handle_message(event):
 '''
  JSON add id
 '''
-# @app.route('/post/<int:post_id>')
-# def show_post(post_id):
-#     # show the post with the given id, the id is an integer
-#     return 'Post %d' % post_id
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
 
 
 
