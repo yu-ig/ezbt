@@ -16,7 +16,7 @@ import random
 import json
 
 # 合言葉 dictionary
-dict = {"GiveMeVideo": "./data/out4.mp4"}    # {"WATCHWORD":"URL"}
+dict = {"GiveMeVideo": "2018-11-21 07/00/34.659341.mp4"}    # {"WATCHWORD":"URL"}
 
 HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
                   u"なにぬねのはひふへほまみむめもやゆよ"\
@@ -74,17 +74,28 @@ def handle_message(event):
     # 暗号と照合..................
     ww = event.message.text
     if ww in dict.keys():
+        # l = list(NAMES_CHARS)
+        metadata, f = dbx.files_download('/SHARE/'+dict["01"])
+        # out = open(dict["01"], 'wb')
+        data = f.content
+        # out.close()
+        out = open(dict["01"], 'wb')
+        out.write(f.content)
+        out.close()
+        print("::: " + str(out))
+        print(len(data), 'bytes; md:', metadata)
         # if watchword  dict
         line_bot_api.reply_message(
             event.reply_token,
             # TextSendMessage(text='SUCCESS!! ' + dict[ww])
 
             VideoSendMessage(
-                original_content_url=dict[ww]
+                original_content_url=out
                 # preview_image_url='https://example.com/preview.jpg'
             )
             #TextSendMessage(text=event.message.text)
         )
+        os.remove(out)
 
     else:
         line_bot_api.reply_message(
