@@ -28,12 +28,14 @@ def generateWW(length):
 if __name__ == "__main__":
     #l = list(NAMES_CHARS)
     metadata, f = dbx.files_download(dict["01"])
+    result = dbx.files_get_temporary_link(dict["01"])
     # out = open(dict["01"], 'wb')
     data = f.content
     # out.close()
     out = open('00.mp4', 'wb')
     out.write(f.content)
     out.close()
+    print("result "+str(result))
     print("::: "+str(out))
     print(len(data), 'bytes; md:', metadata)
 

@@ -14,6 +14,7 @@ import os
 import dropbox
 import random
 import json
+import urllib3
 
 # 合言葉 dictionary
 dict = {"vid": "00.mp4"}    # {"WATCHWORD":"URL"}
@@ -86,14 +87,16 @@ def handle_message(event):
         # print("::: " + str(data))
         # print(len(data), 'bytes; md:', metadata)
         # if watchword  dict
+        url = 'https://damp-sands-30274.herokuapp.com/'
+        path = '00.mp4'
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!! ' )
+            # TextSendMessage(text='SUCCESS!! ' )
 
-            # VideoSendMessage(
-            #     original_content_url=f
-            #     # preview_image_url='https://example.com/preview.jpg'
-            # )
+            VideoSendMessage(
+                original_content_url=urllib3.urlretrieve(url, path)
+                # preview_image_url='https://example.com/preview.jpg'
+            )
             #TextSendMessage(text=event.message.text)
         )
         # os.remove(out)
