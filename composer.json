@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "compile": [
+      "chmod -R 777 app/send/",
+
+    ]
+  }
+}
