@@ -16,7 +16,7 @@ import random
 import json
 
 # 合言葉 dictionary
-dict = {"ww": "./data/out4.mp4"}    # {"WATCHWORD":"URL"}
+dict = {"hi": "./data/out4.mp4"}    # {"WATCHWORD":"URL"}
 
 HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
                   u"なにぬねのはひふへほまみむめもやゆよ"\
@@ -117,7 +117,7 @@ def generateWW(length):
 if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
     port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
 
 
 
