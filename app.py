@@ -70,7 +70,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=VideoMessage)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # 暗号と照合..................
     ww = event.message.text
@@ -95,8 +95,8 @@ def handle_message(event):
             # TextSendMessage(text='SUCCESS!! ' + url+path)
 
             VideoSendMessage(
-                original_content_url= url+path
-                # preview_image_url='https://example.com/preview.jpg'
+                original_content_url= url+path,
+                preview_image_url=url+"0.jpg"
             )
             #TextSendMessage(text=event.message.text)
         )
