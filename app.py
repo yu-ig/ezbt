@@ -16,7 +16,7 @@ import random
 import json
 
 # 合言葉 dictionary
-dict = {"hi": "yeah!"}    # {"WATCHWORD":"URL"}
+dict = {"GiveMeVideo": "./data/out4.mp4"}    # {"WATCHWORD":"URL"}
 
 HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
                   u"なにぬねのはひふへほまみむめもやゆよ"\
@@ -77,12 +77,12 @@ def handle_message(event):
         # if watchword  dict
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!! ' + dict[ww])
+            # TextSendMessage(text='SUCCESS!! ' + dict[ww])
 
-            # VideoSendMessage(
-            #     original_content_url=dict[ww]
-            #     # preview_image_url='https://example.com/preview.jpg'
-            # )
+            VideoSendMessage(
+                original_content_url=dict[ww]
+                # preview_image_url='https://example.com/preview.jpg'
+            )
             #TextSendMessage(text=event.message.text)
         )
 
