@@ -37,11 +37,11 @@ logger.setLevel(logging.ERROR)
 
 
 
-DROPBOX_APP_KEY = "eqdo0y9azq27imf"
-DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
-DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
-
-dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+# DROPBOX_APP_KEY = "eqdo0y9azq27imf"
+# DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
+# DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
+#
+# dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 
 
 @app.route('/')
