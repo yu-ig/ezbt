@@ -16,7 +16,7 @@ import random
 import json
 
 # 合言葉 dictionary
-dict = {'どうが':"おめでとう。"}    # {"WATCHWORD":"URL"}
+dict = {"動画": "おめでとう。"}    # {"WATCHWORD":"URL"}
 
 HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
                   u"なにぬねのはひふへほまみむめもやゆよ"\
