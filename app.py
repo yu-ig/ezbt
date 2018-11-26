@@ -87,12 +87,12 @@ def handle_message(event):
         # if watchword  dict
         line_bot_api.reply_message(
             event.reply_token,
-            # TextSendMessage(text='SUCCESS!! ' + dict[ww])
+            TextSendMessage(text='SUCCESS!! ' + str(out))
 
-            VideoSendMessage(
-                original_content_url=f
-                # preview_image_url='https://example.com/preview.jpg'
-            )
+            # VideoSendMessage(
+            #     original_content_url=f
+            #     # preview_image_url='https://example.com/preview.jpg'
+            # )
             #TextSendMessage(text=event.message.text)
         )
         os.remove(out)
