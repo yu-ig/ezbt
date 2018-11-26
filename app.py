@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, render_template
+from flask import Flask, request, abort, render_template, send_file
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -95,7 +95,7 @@ def handle_message(event):
             # TextSendMessage(text='SUCCESS!! ' + url+path)
 
             VideoSendMessage(
-                original_content_url=url,
+                original_content_url=str(report1(0)),
                 preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
             )
             #TextSendMessage(text=event.message.text)
@@ -112,10 +112,20 @@ def handle_message(event):
 '''
  JSON add id
 '''
-@app.route('/post/<int:post_id>')
 def show_post(post_id):
     # show the post with the given id, the id is an integer
     return 'Post %d' % post_id
+
+
+@app.route('/report1/<string:report_id>', methods=['GET'])
+def report1(report_id):
+
+    # ★ポイント2
+    downloadFileName = 'report1_' + 00 + '.mp4'
+    downloadFile = 'send/00.mp4'
+
+    # ★ポイント3
+    return send_file(downloadFile, as_attachment = True, mimetype = 'video/mp4')
 
 
 
