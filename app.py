@@ -92,7 +92,7 @@ def handle_message(event):
         mojiretsu = "mojimojimoji"
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='SUCCESS!! ' + mojiretsu)
+            TextSendMessage(text='SUCCESS!! ' + url+path)
 
             # VideoSendMessage(
             #     original_content_url=url
