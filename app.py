@@ -84,7 +84,8 @@ def handle_message(event):
 
         url = 'https://github.com/yu-ig/ezbt'
         vm = VideoSendMessage(
-            original_content_url=" https://damp-sands-30274.herokuapp.com/send/00.mp4"
+            original_content_url="https://damp-sands-30274.herokuapp.com/send/00.mp4",
+            preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
         )
         messages.append(vm)
 
