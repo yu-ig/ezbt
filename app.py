@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, render_template, send_file
+from flask import Flask, request, abort, render_template, send_file, Response, stream_with_context
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -48,10 +48,15 @@ dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 @app.route('/')
 def index():
     # result = dbx.sharing_get_shared_link_file('https://www.dropbox.com/home/%E3%82%A2%E3%83%97%E3%83%AA/LDH/SHARE/00.mp4')
-    return "Hello world"
+    # return "Hello world"
 
+    def generate():
+        with open("/root/media_assets/" + file["path"], "rb") as f:
+            while True:
+                chunk = ...  # read each chunk or break if EOF
+                yield chunk
 
-
+    return Response(stream_with_context(generate()), mimetype="video/mp4")
 
 
 @app.route("/callback", methods=['POST'])
