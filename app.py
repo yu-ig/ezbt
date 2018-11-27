@@ -79,15 +79,16 @@ def handle_message(event):
 
 
         messages.append(TextSendMessage(text='SUCCESS!! '))
-        m = TextSendMessage(text="next message")
+        result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
+        m = TextSendMessage(text=str(result))
         messages.append(m)
 
         url = 'https://github.com/yu-ig/ezbt'
-        vm = VideoSendMessage(
-            original_content_url="https://damp-sands-30274.herokuapp.com/send/00.mp4",
-            preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
-        )
-        messages.append(vm)
+        # vm = VideoSendMessage(
+        #     original_content_url="https://damp-sands-30274.herokuapp.com/send/00.mp4",
+        #     preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
+        # )
+        # messages.append(vm)
 
         ###############################################################
         line_bot_api.reply_message(
