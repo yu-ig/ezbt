@@ -79,7 +79,8 @@ def handle_message(event):
 
 
         messages.append(TextSendMessage(text='SUCCESS!! '))
-
+        m = TextSendMessage(text="next message")
+        messages.append(m)
 
         ###############################################################
         line_bot_api.reply_message(
