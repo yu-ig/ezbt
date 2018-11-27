@@ -97,7 +97,7 @@ def handle_message(event):
                 original_content_url=url,
                 preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
             )
-        messages.append(vmessage)
+        # messages.append(vmessage)
 
         # mojiretsu = "mojimojimoji"
         line_bot_api.reply_message(
