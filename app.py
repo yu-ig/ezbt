@@ -75,6 +75,7 @@ def handle_message(event):
     # 暗号と照合..................
     ww = event.message.text
     if ww in dict.keys():
+        messages = []
         # l = list(NAMES_CHARS)
         metadata, f = dbx.files_download('/SHARE/'+dict[ww])
         result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
@@ -89,16 +90,23 @@ def handle_message(event):
         # if watchword  dict
         url = "https://damp-sands-30274.herokuapp.com/"+str(dict[ww]+".mp4")
         path = '00.mp4'
+
+        messages.append(TextSendMessage(text='SUCCESS!! '))
+
+        vmessage = VideoSendMessage(
+                original_content_url=url,
+                preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
+            )
+        messages.append(vmessage)
+
         # mojiretsu = "mojimojimoji"
         line_bot_api.reply_message(
             event.reply_token,
+            messages
             # TextSendMessage(text='SUCCESS!! ' + url+path)
 
-            # VideoSendMessage(
-            #     original_content_url=url,
-            #     preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
-            # )
-            TextSendMessage(text=result)
+
+            # TextSendMessage(text=result)
         )
         # os.remove(out)
 
