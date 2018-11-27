@@ -77,7 +77,7 @@ def handle_message(event):
     if ww in dict.keys():
         # l = list(NAMES_CHARS)
         # metadata, f = dbx.files_download('/SHARE/'+dict[ww])
-        # result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
+        result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
         # out = open(dict["01"], 'wb')
         # data = f.content
         # out.close()
@@ -94,11 +94,11 @@ def handle_message(event):
             event.reply_token,
             # TextSendMessage(text='SUCCESS!! ' + url+path)
 
-            VideoSendMessage(
-                original_content_url=str(report1(0)),
-                preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
-            )
-            #TextSendMessage(text=event.message.text)
+            # VideoSendMessage(
+            #     original_content_url=str(report1(0)),
+            #     preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
+            # )
+            TextSendMessage(text=result)
         )
         # os.remove(out)
 
