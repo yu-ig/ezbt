@@ -76,37 +76,15 @@ def handle_message(event):
     ww = event.message.text
     if ww in dict.keys():
         messages = []
-        # l = list(NAMES_CHARS)
-        metadata, f = dbx.files_download('/SHARE/'+dict[ww])
-        result = dbx.files_get_temporary_link('/SHARE/'+dict[ww])
-        out = open(dict["ww"], 'wb')
-        # data = f.content
-        # out.close()
-        # out = open(dict[ww], 'wb')
-        out.write(f.content)
-        # out.close()
-        # print("::: " + str(data))
-        # print(len(data), 'bytes; md:', metadata)
-        # if watchword  dict
-        url = "https://damp-sands-30274.herokuapp.com/"+str(dict[ww]+".mp4")
-        path = '00.mp4'
+
 
         messages.append(TextSendMessage(text='SUCCESS!! '))
 
-        vmessage = VideoSendMessage(
-                original_content_url=url,
-                preview_image_url="https://damp-sands-30274.herokuapp.com/send/0.jpg"
-            )
-        # messages.append(vmessage)
 
-        # mojiretsu = "mojimojimoji"
+        ###############################################################
         line_bot_api.reply_message(
             event.reply_token,
             messages
-            # TextSendMessage(text='SUCCESS!! ' + url+path)
-
-
-            # TextSendMessage(text=result)
         )
         # os.remove(out)
 
