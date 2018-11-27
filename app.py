@@ -82,6 +82,11 @@ def handle_message(event):
         m = TextSendMessage(text="next message")
         messages.append(m)
 
+        url = 'https://github.com/yu-ig/ezbt'
+        vm = VideoSendMessage(
+            original_content_url=" https://damp-sands-30274.herokuapp.com/send/00.mp4"
+        )
+
         ###############################################################
         line_bot_api.reply_message(
             event.reply_token,
