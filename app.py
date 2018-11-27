@@ -86,6 +86,7 @@ def handle_message(event):
         vm = VideoSendMessage(
             original_content_url=" https://damp-sands-30274.herokuapp.com/send/00.mp4"
         )
+        messages.append(vm)
 
         ###############################################################
         line_bot_api.reply_message(
