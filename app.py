@@ -47,7 +47,9 @@ dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 
 @app.route('/')
 def index():
-    return "Hello world"
+    result = dbx.sharing_get_shared_link_file('https://www.dropbox.com/home/%E3%82%A2%E3%83%97%E3%83%AA/LDH/SHARE/00.mp4')
+    # return "Hello world"
+    return str(result)
 
 
 
@@ -79,9 +81,9 @@ def handle_message(event):
 
 
         messages.append(TextSendMessage(text='SUCCESS!! '))
-        result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
-        m = TextSendMessage(text=str(result))
-        messages.append(m)
+        # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
+        # m = TextSendMessage(text=str(result))
+        # messages.append(m)
 
         url = 'https://github.com/yu-ig/ezbt'
         # vm = VideoSendMessage(
