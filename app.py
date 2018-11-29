@@ -82,7 +82,12 @@ def handle_message(event):
 
     # 暗号と照合..................
     ww = event.message.text
-    if ww in dict:
+    flag = False
+    for t in dict:
+        if dict[t]['PW'] == ww:
+            flag = True
+
+    if flag:
         messages = []
         messages.append(TextSendMessage(text=str(dict[ww])))
         # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
@@ -164,9 +169,9 @@ def getDebug():
     json_data = json.load(f)
     tmp = ""
     for t in json_data:
-        tmp += t['PW'] + " "
+        tmp += json_data[t]['PW'] + " "
 
-    return json.dumps(json_data)
+    return tmp
 
 
 # 文字列を適当に生成するよ。
