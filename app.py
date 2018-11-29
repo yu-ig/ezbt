@@ -148,7 +148,11 @@ def post(post_text):
 #
 #     return w
 
-
+@app.route('/get/')
+def getJson():
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
+    return json.dumps(json_data)
 
 
 
