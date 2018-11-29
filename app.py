@@ -115,7 +115,7 @@ def post(post_text):
     # show the post with the given id, the id is an integer
     t = post_text.split(',')
 
-    f = open("./data/data.json", mode='r')
+    f = open("data/data.json", mode='r')
     json_data = json.load(f)
 
     # ココ重要！！
@@ -123,7 +123,7 @@ def post(post_text):
     # print("{}".format(json.dumps(json_data, indent=4)))
     f.close()
 
-    with open("./data/data.json", 'w') as f2:
+    with open("data/data.json", 'w') as f2:
         '''
         ここでjsonに加筆
         '''
