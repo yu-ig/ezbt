@@ -17,7 +17,7 @@ import json
 import urllib3
 
 # 合言葉 dictionary
-dict = {"vid": "00.mp4"}    # {"WATCHWORD":"URL"}
+dict = {}    # {"WATCHWORD":"URL"}
 
 HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
                   u"なにぬねのはひふへほまみむめもやゆよ"\
@@ -75,6 +75,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    with open('data/data.json','r') as f:
+        dict = json.load(f)
+
+
     # 暗号と照合..................
     ww = event.message.text
     if ww in dict.keys():
