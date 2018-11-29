@@ -83,9 +83,7 @@ def handle_message(event):
     ww = event.message.text
     if ww in dict.keys():
         messages = []
-
-
-        messages.append(TextSendMessage(text='https://www.youtube.com/watch?v=IC-wDpwzEt4 '))
+        messages.append(TextSendMessage(text=dict[ww]))
         # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
         # m = TextSendMessage(text=str(result))
         # messages.append(m)
