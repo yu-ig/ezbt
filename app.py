@@ -134,7 +134,7 @@ def post(post_text):
 
         f2.write(str(json.dumps(json_data, indent=4)))
 
-    return t[1]
+    return str(t[0]+" "+t[1] + " " +t[2])
 
 
 # @app.route('/post/<string:post_id>')
