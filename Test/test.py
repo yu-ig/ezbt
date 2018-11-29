@@ -45,4 +45,6 @@ if __name__ == "__main__":
     #
     # s = generateWW(10)
     # # print(s)
-   requests.post("https://damp-sands-30274.herokuapp.com/post/000000,kkfkkfkd,lsdd")
+    requests.get("https://damp-sands-30274.herokuapp.com/post/000002,kkfkkfkd,lsdd")
+    print("FINISH")
+

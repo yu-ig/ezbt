@@ -79,34 +79,37 @@ def handle_message(event):
         dict = json.load(f)
 
 
+
     # 暗号と照合..................
     ww = event.message.text
-    if ww in dict.keys():
-        messages = []
-        messages.append(TextSendMessage(text=str(dict[ww])))
-        # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
-        # m = TextSendMessage(text=str(result))
-        # messages.append(m)
+    for id in dict:
 
-        # url = 'https://github.com/yu-ig/ezbt'
-        vm = VideoSendMessage(
-            original_content_url="https://damp-sands-30274.herokuapp.com/static/00.mp4",
-            preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
-        )
-        messages.append(vm)
+        if id["PW"] == ww:
+            messages = []
+            messages.append(TextSendMessage(text=str(id["DL"])))
+            # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
+            # m = TextSendMessage(text=str(result))
+            # messages.append(m)
 
-        ###############################################################
-        line_bot_api.reply_message(
-            event.reply_token,
-            messages
-        )
-        # os.remove(out)
+            # url = 'https://github.com/yu-ig/ezbt'
+            vm = VideoSendMessage(
+                original_content_url="https://damp-sands-30274.herokuapp.com/static/00.mp4",
+                preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
+            )
+            messages.append(vm)
 
-    else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
-        )
+            ###############################################################
+            line_bot_api.reply_message(
+                event.reply_token,
+                messages
+            )
+            # os.remove(out)
+
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
+            )
 
 
 '''
