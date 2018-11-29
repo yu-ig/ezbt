@@ -23,6 +23,8 @@ HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつて
                   u"なにぬねのはひふへほまみむめもやゆよ"\
                   u"らりるれろわをん")
 
+users = {}
+
 
 
 CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
@@ -106,22 +108,46 @@ def handle_message(event):
 
 
 '''
- JSON add id
+ JSON add id  [id, DL, PW]
 '''
-def show_post(post_id):
+@app.route('/post/<string:post_text>')
+def post(post_text):
     # show the post with the given id, the id is an integer
-    return 'Post %d' % post_id
+    t = post_text.split(',')
+
+    f = open("./data/data.json", mode='r')
+    json_data = json.load(f)
+
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+
+    with open("./data/data.json", 'w') as f2:
+        '''
+        ここでjsonに加筆
+        '''
+        json_data[t[0]] = {
+            "DL": t[1],
+            "PW": t[2]
+        }
+
+        f2.write(str(json.dumps(json_data, indent=4)))
+
+    return t[1]
 
 
-@app.route('/report1/<string:report_id>', methods=['GET'])
-def report1(report_id):
+# @app.route('/post/<string:post_id>')
+# def show_post(post_id):
+#     # show the post with the given id, the id is an integer
+#     t = post_id.split(',')
+#
+#     w =""
+#     for tmp in t :
+#         w += tmp
+#
+#     return w
 
-    # ★ポイント2
-    downloadFileName = 'report1_' + 00 + '.mp4'
-    downloadFile = 'send/00.mp4'
-
-    # ★ポイント3
-    return send_file(downloadFile, as_attachment = True, mimetype = 'video/mp4')
 
 
 
@@ -136,8 +162,28 @@ def generateWW(length):
     return watchword
 
 
+
+def dbx():
+    print("Initializing Dropbox API...")
+    dbx = dropbox.Dropbox("4c0XTxvPmbAAAAAAAABrXqips-_F7J8hZ6LCMsVgRb4uKZEr08Mvf-VMv1b8mupE")
+    dbx.users_get_current_account()
+    # f = open(filePath, 'rb')
+    # filename = str(datetime.datetime.now()) + ".mp4"
+    # dbx.files_upload(f.read(), '/SHARE/' + filename)
+    # f.close()
+
+    # metadata, f = dbx.files_download('/' + j)
+    # out = open(j, 'wb')
+    # out.write(f.content)
+    # out.close()
+
+
+
+
+
 if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
+    # post(1,"000000", "jijsdiaji")
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
 
