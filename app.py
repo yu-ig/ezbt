@@ -50,7 +50,7 @@ dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 @app.route('/')
 def index():
     # result = dbx.sharing_get_shared_link_file('https://www.dropbox.com/home/%E3%82%A2%E3%83%97%E3%83%AA/LDH/SHARE/00.mp4')
-    return "Hello world"
+    return "REX THE LIVE!!!"
 
 
 

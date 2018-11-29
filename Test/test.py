@@ -1,7 +1,7 @@
 
 import random
 import dropbox
-
+import requests
 
 import json
 
@@ -45,4 +45,4 @@ if __name__ == "__main__":
     #
     # s = generateWW(10)
     # # print(s)
-   pass
+   requests.post("https://damp-sands-30274.herokuapp.com/post/000000,kkfkkfkd,lsdd")
