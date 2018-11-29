@@ -83,7 +83,7 @@ def handle_message(event):
     ww = event.message.text
     if ww in dict.keys():
         messages = []
-        messages.append(TextSendMessage(text=dict[ww]))
+        messages.append(TextSendMessage(text=str(dict[ww])))
         # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
         # m = TextSendMessage(text=str(result))
         # messages.append(m)
