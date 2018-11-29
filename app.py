@@ -78,38 +78,36 @@ def handle_message(event):
     with open('data/data.json','r') as f:
         dict = json.load(f)
 
-
+    tmp = dict
 
     # 暗号と照合..................
     ww = event.message.text
-    for id in dict:
+    if ww in dict:
+        messages = []
+        messages.append(TextSendMessage(text=str(dict[ww])))
+        # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
+        # m = TextSendMessage(text=str(result))
+        # messages.append(m)
 
-        if id["PW"] == ww:
-            messages = []
-            messages.append(TextSendMessage(text=str(id["DL"])))
-            # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
-            # m = TextSendMessage(text=str(result))
-            # messages.append(m)
+        # url = 'https://github.com/yu-ig/ezbt'
+        vm = VideoSendMessage(
+            original_content_url="https://damp-sands-30274.herokuapp.com/static/00.mp4",
+            preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
+        )
+        messages.append(vm)
 
-            # url = 'https://github.com/yu-ig/ezbt'
-            vm = VideoSendMessage(
-                original_content_url="https://damp-sands-30274.herokuapp.com/static/00.mp4",
-                preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
-            )
-            messages.append(vm)
+        ###############################################################
+        line_bot_api.reply_message(
+            event.reply_token,
+            messages
+        )
+        # os.remove(out)
 
-            ###############################################################
-            line_bot_api.reply_message(
-                event.reply_token,
-                messages
-            )
-            # os.remove(out)
-
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
-            )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
+        )
 
 
 '''
@@ -159,6 +157,16 @@ def getJson():
     json_data = json.load(f)
     return json.dumps(json_data)
 
+
+@app.route('/getDebug/')
+def getDebug():
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
+    tmp = ""
+    for t in json_data:
+        tmp += t['PW'] + " "
+
+    return json.dumps(json_data)
 
 
 # 文字列を適当に生成するよ。
