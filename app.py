@@ -45,6 +45,7 @@ DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
 DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
 
 dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+dbx.users_get_current_account()
 
 
 @app.route('/')
@@ -145,9 +146,8 @@ def post(post_text):
 
         f2.write(str(json.dumps(json_data, indent=4)))
 
-    # dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
-    # dbx.users_get_current_account()
-    # dbx.files_download_to_file(t[0]+'.mp4', 'static/' + t[0]+'.mp4')
+
+    dbx.files_download_to_file(t[0], 'static/' + t[0])
 
 
     return str(t[0]+" "+t[1] + " " +t[2])
