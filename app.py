@@ -95,7 +95,7 @@ def handle_message(event):
 
         # url = 'https://github.com/yu-ig/ezbt'
         vm = VideoSendMessage(
-            original_content_url=db.link,
+            original_content_url="https://damp-sands-30274.herokuapp.com/static/"+t[0],
             preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
         )
         messages.append(vm)
@@ -143,7 +143,7 @@ def post(post_text):
         f2.write(str(json.dumps(json_data, indent=4)))
 
 
-    dbx.files_download_to_file(t[0], 'static/' + t[0])
+    dbx.files_download_to_file("SHARE/"+t[0], 'static/' + t[0])
 
 
 
