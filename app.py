@@ -145,9 +145,9 @@ def post(post_text):
 
         f2.write(str(json.dumps(json_data, indent=4)))
 
-    dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
-    dbx.users_get_current_account()
-    dbx.files_download_to_file(t[0]+'.mp4', 'static/' + t[0]+'.mp4')
+    # dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+    # dbx.users_get_current_account()
+    # dbx.files_download_to_file(t[0]+'.mp4', 'static/' + t[0]+'.mp4')
 
 
     return str(t[0]+" "+t[1] + " " +t[2])
