@@ -90,11 +90,12 @@ def handle_message(event):
         # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
         # m = TextSendMessage(text=str(result))
         # messages.append(m)
+        db = dbx.files_get_temporary_link('/SHARE/' + dlfile)
+
 
         # url = 'https://github.com/yu-ig/ezbt'
         vm = VideoSendMessage(
-            # original_content_url="https://damp-sands-30274.herokuapp.com/static/"+t,
-            original_content_url=urllib.parse.unquote(dict[t]['DL']),
+            original_content_url=db.link,
             preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
         )
         messages.append(vm)
