@@ -19,12 +19,6 @@ import urllib3
 # 合言葉 dictionary
 dict = {}    # {"WATCHWORD":"URL"}
 
-HIRAGANA_LIST = list(u"あいうえおかきくけこさしすせそたちつてと"\
-                  u"なにぬねのはひふへほまみむめもやゆよ"\
-                  u"らりるれろわをん")
-
-users = {}
-
 
 
 CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
