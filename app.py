@@ -33,13 +33,13 @@ logger = logging.getLogger()
 logger.setLevel(logging.ERROR)
 
 
-
-DROPBOX_APP_KEY = "eqdo0y9azq27imf"
-DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
-DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
-
-dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
-dbx.users_get_current_account()
+#
+# DROPBOX_APP_KEY = "eqdo0y9azq27imf"
+# DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
+# DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
+#
+# dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+# dbx.users_get_current_account()
 
 
 @app.route('/')
@@ -115,37 +115,37 @@ def handle_message(event):
 '''
  JSON add id  [id, DL, PW]
 '''
-@app.route('/post/<string:post_text>')
-def post(post_text):
-    # show the post with the given id, the id is an integer
-    t = post_text.split(',')
-
-    f = open("data/data.json", mode='r')
-    json_data = json.load(f)
-
-    # ココ重要！！
-    # インデントありで表示
-    # print("{}".format(json.dumps(json_data, indent=4)))
-    f.close()
-
-    with open("data/data.json", 'w') as f2:
-        '''
-        ここでjsonに加筆
-        
-        '''
-        json_data[t[0]] = {
-            "DL": t[1],
-            "PW": t[2]
-        }
-
-        f2.write(str(json.dumps(json_data, indent=4)))
-
-
-    # dbx.files_download_to_file(t[0], 'static/' + t[0])
-
-
-
-    return str(t[0]+" "+t[1] + " " +t[2])
+# @app.route('/post/<string:post_text>')
+# def post(post_text):
+#     # show the post with the given id, the id is an integer
+#     t = post_text.split(',')
+#
+#     f = open("data/data.json", mode='r')
+#     json_data = json.load(f)
+#
+#     # ココ重要！！
+#     # インデントありで表示
+#     # print("{}".format(json.dumps(json_data, indent=4)))
+#     f.close()
+#
+#     with open("data/data.json", 'w') as f2:
+#         '''
+#         ここでjsonに加筆
+#
+#         '''
+#         json_data[t[0]] = {
+#             "DL": t[1],
+#             "PW": t[2]
+#         }
+#
+#         f2.write(str(json.dumps(json_data, indent=4)))
+#
+#
+#     # dbx.files_download_to_file(t[0], 'static/' + t[0])
+#
+#
+#
+#     return str(t[0]+" "+t[1] + " " +t[2])
 
 
 # @app.route('/post/<string:post_id>')
@@ -159,39 +159,25 @@ def post(post_text):
 #
 #     return w
 
-@app.route('/get/')
-def getJson():
-    f = open("data/data.json", mode='r')
-    json_data = json.load(f)
-    return json.dumps(json_data)
-
-
-@app.route('/getDebug/')
-def getDebug():
-    f = open("data/data.json", mode='r')
-    json_data = json.load(f)
-    tmp = ""
-    for t in json_data:
-        tmp += json_data[t]['PW'] + " "
-
-    return tmp
-
-
-
-def dbx():
-    print("Initializing Dropbox API...")
-    dbx = dropbox.Dropbox("4c0XTxvPmbAAAAAAAABrXqips-_F7J8hZ6LCMsVgRb4uKZEr08Mvf-VMv1b8mupE")
-    dbx.users_get_current_account()
-
-
-
+# @app.route('/get/')
+# def getJson():
+#     f = open("data/data.json", mode='r')
+#     json_data = json.load(f)
+#     return json.dumps(json_data)
+#
+#
+# @app.route('/getDebug/')
+# def getDebug():
+#     f = open("data/data.json", mode='r')
+#     json_data = json.load(f)
+#     tmp = ""
+#     for t in json_data:
+#         tmp += json_data[t]['PW'] + " "
+#
+#     return tmp
 
 if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
     # post(1,"000000", "jijsdiaji")
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
-
-
-
-
