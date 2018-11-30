@@ -115,37 +115,37 @@ def handle_message(event):
 '''
  JSON add id  [id, DL, PW]
 '''
-# @app.route('/post/<string:post_text>')
-# def post(post_text):
-#     # show the post with the given id, the id is an integer
-#     t = post_text.split(',')
-#
-#     f = open("data/data.json", mode='r')
-#     json_data = json.load(f)
-#
-#     # ココ重要！！
-#     # インデントありで表示
-#     # print("{}".format(json.dumps(json_data, indent=4)))
-#     f.close()
-#
-#     with open("data/data.json", 'w') as f2:
-#         '''
-#         ここでjsonに加筆
-#
-#         '''
-#         json_data[t[0]] = {
-#             "DL": t[1],
-#             "PW": t[2]
-#         }
-#
-#         f2.write(str(json.dumps(json_data, indent=4)))
-#
-#
-#     # dbx.files_download_to_file(t[0], 'static/' + t[0])
-#
-#
-#
-#     return str(t[0]+" "+t[1] + " " +t[2])
+@app.route('/post/<string:post_text>')
+def post(post_text):
+    # show the post with the given id, the id is an integer
+    t = post_text.split(',')
+
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
+
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+
+    with open("data/data.json", 'w') as f2:
+        '''
+        ここでjsonに加筆
+
+        '''
+        json_data[t[0]] = {
+            "DL": t[1],
+            "PW": t[2]
+        }
+
+        f2.write(str(json.dumps(json_data, indent=4)))
+
+
+    # dbx.files_download_to_file(t[0], 'static/' + t[0])
+
+
+
+    return str(t[0]+" "+t[1] + " " +t[2])
 
 
 # @app.route('/post/<string:post_id>')
@@ -159,22 +159,22 @@ def handle_message(event):
 #
 #     return w
 
-# @app.route('/get/')
-# def getJson():
-#     f = open("data/data.json", mode='r')
-#     json_data = json.load(f)
-#     return json.dumps(json_data)
-#
-#
-# @app.route('/getDebug/')
-# def getDebug():
-#     f = open("data/data.json", mode='r')
-#     json_data = json.load(f)
-#     tmp = ""
-#     for t in json_data:
-#         tmp += json_data[t]['PW'] + " "
-#
-#     return tmp
+@app.route('/get/')
+def getJson():
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
+    return json.dumps(json_data)
+
+
+@app.route('/getDebug/')
+def getDebug():
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
+    tmp = ""
+    for t in json_data:
+        tmp += json_data[t]['PW'] + " "
+
+    return tmp
 
 if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
