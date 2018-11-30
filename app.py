@@ -144,7 +144,7 @@ def post(post_text):
 
         dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
         dbx.users_get_current_account()
-        dbx.files_download_to_file(t[0], 'static/'  + t[0])
+        dbx.files_download_to_file(t[0], 'static/' + t[0])
 
         f2.write(str(json.dumps(json_data, indent=4)))
 
