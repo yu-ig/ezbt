@@ -136,6 +136,7 @@ def post(post_text):
     with open("data/data.json", 'w') as f2:
         '''
         ここでjsonに加筆
+        
         '''
         json_data[t[0]] = {
             "DL": t[1],
