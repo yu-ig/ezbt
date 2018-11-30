@@ -83,8 +83,10 @@ def handle_message(event):
     # 暗号と照合..................
     ww = event.message.text
     flag = False
+    dlfile = ""
     for t in dict:
         if dict[t]['PW'] == ww:
+            dlfile = t
             flag = True
 
     if flag:
@@ -96,7 +98,7 @@ def handle_message(event):
 
         # url = 'https://github.com/yu-ig/ezbt'
         vm = VideoSendMessage(
-            original_content_url="https://damp-sands-30274.herokuapp.com/static/00.mp4",
+            original_content_url="https://damp-sands-30274.herokuapp.com/static/"+t,
             preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
         )
         messages.append(vm)
@@ -140,7 +142,13 @@ def post(post_text):
             "PW": t[2]
         }
 
+        dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+        dbx.users_get_current_account()
+        dbx.files_download_to_file(t[0], '/' + t[0])
+
         f2.write(str(json.dumps(json_data, indent=4)))
+
+
 
     return str(t[0]+" "+t[1] + " " +t[2])
 
