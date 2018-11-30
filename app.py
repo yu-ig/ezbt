@@ -142,8 +142,12 @@ def post(post_text):
 
         f2.write(str(json.dumps(json_data, indent=4)))
 
+    path = "/SHARE/"+t[0]
+    md, res = dbx.files_download(path)
+    out = open("../static/"+t[0], 'wb')
+    out.write(res.content)
 
-    dbx.files_download_to_file("SHARE/"+t[0], 'static/' + t[0])
+
 
 
 
