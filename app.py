@@ -14,7 +14,7 @@ import os
 import dropbox
 import random
 import json
-import urllib3
+import urllib
 
 # 合言葉 dictionary
 dict = {}    # {"WATCHWORD":"URL"}
@@ -93,7 +93,8 @@ def handle_message(event):
 
         # url = 'https://github.com/yu-ig/ezbt'
         vm = VideoSendMessage(
-            original_content_url="https://damp-sands-30274.herokuapp.com/static/"+t,
+            # original_content_url="https://damp-sands-30274.herokuapp.com/static/"+t,
+            original_content_url=dict[t]['DL'],
             preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
         )
         messages.append(vm)
