@@ -141,7 +141,7 @@ def post(post_text):
         f2.write(str(json.dumps(json_data, indent=4)))
 
 
-    dbx.files_download_to_file(t[0], 'static/' + t[0])
+    #dbx.files_download_to_file(t[0], 'static/' + t[0])
 
 
 
