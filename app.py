@@ -183,31 +183,11 @@ def getDebug():
     return tmp
 
 
-# 文字列を適当に生成するよ。
-def generateWW(length):
-    watchword = ""
-    for i in range(length):
-        n = len(HIRAGANA_LIST)
-        watchword = watchword + HIRAGANA_LIST[random.randint(0, n-1)]
-
-    return watchword
-
-
 
 def dbx():
     print("Initializing Dropbox API...")
     dbx = dropbox.Dropbox("4c0XTxvPmbAAAAAAAABrXqips-_F7J8hZ6LCMsVgRb4uKZEr08Mvf-VMv1b8mupE")
     dbx.users_get_current_account()
-    # f = open(filePath, 'rb')
-    # filename = str(datetime.datetime.now()) + ".mp4"
-    # dbx.files_upload(f.read(), '/SHARE/' + filename)
-    # f.close()
-
-    # metadata, f = dbx.files_download('/' + j)
-    # out = open(j, 'wb')
-    # out.write(f.content)
-    # out.close()
-
 
 
 
@@ -221,10 +201,3 @@ if __name__ == "__main__":
 
 
 
-
-
-# {
-#     "type": "video",
-#     "originalContentUrl": "https://example.com/original.mp4",
-#     "previewImageUrl": "https://example.com/preview.jpg"
-# }
