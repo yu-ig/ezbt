@@ -15,6 +15,7 @@ import dropbox
 import random
 import json
 import urllib
+import glob2
 
 # 合言葉 dictionary
 dict = {}    # {"WATCHWORD":"URL"}
@@ -180,6 +181,15 @@ def getDebug():
         tmp += json_data[t]['PW'] + " "
 
     return tmp
+
+@app.route('/getFiles/')
+def detFiles():
+    fs = glob2.glob("static/*.mp4")
+    t = ""
+    for f in fs:
+        t += f + "\n"
+
+    return t
 
 if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
