@@ -144,7 +144,7 @@ def post(post_text):
 
     path = "/SHARE/"+t[0]
     md, res = dbx.files_download(path)
-    out = open("../static/"+t[0], 'wb')
+    out = open("static/"+t[0], 'wb')
     out.write(res.content)
 
 
