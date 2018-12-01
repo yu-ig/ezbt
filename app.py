@@ -45,6 +45,20 @@ dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 
 @app.route('/')
 def index():
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
+
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+    for t in json_data:
+        print(t)
+        path = "/SHARE/" + t
+        md, res = dbx.files_download(path)
+        out = open("static/" + t, 'wb')
+        out.write(res.content)
+
     # result = dbx.sharing_get_shared_link_file('https://www.dropbox.com/home/%E3%82%A2%E3%83%97%E3%83%AA/LDH/SHARE/00.mp4')
     return "REX THE LIVE!!!"
 
@@ -149,9 +163,7 @@ def post(post_text):
 
 
 
-
-
-    return str(t[0]+" "+t[1] + " " +t[2])
+    # return str(t[0]+" "+t[1] + " " +t[2])
 
 
 # @app.route('/post/<string:post_id>')
@@ -169,6 +181,16 @@ def post(post_text):
 def getJson():
     f = open("data/data.json", mode='r')
     json_data = json.load(f)
+
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+    for t in json_data:
+        path = "/SHARE/" + t
+        md, res = dbx.files_download(path)
+        out = open("static/" + t, 'wb')
+        out.write(res.content)
     return json.dumps(json_data)
 
 
@@ -176,6 +198,16 @@ def getJson():
 def getDebug():
     f = open("data/data.json", mode='r')
     json_data = json.load(f)
+
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+    for t in json_data:
+        path = "/SHARE/" + t
+        md, res = dbx.files_download(path)
+        out = open("static/" + t, 'wb')
+        out.write(res.content)
     tmp = ""
     for t in json_data:
         tmp += json_data[t]['PW'] + " "

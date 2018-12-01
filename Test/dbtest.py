@@ -1,7 +1,7 @@
 import dropbox
 import time
 import os
-
+import json
 #
 DROPBOX_APP_KEY = "eqdo0y9azq27imf"
 DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
@@ -39,10 +39,24 @@ def stopwatch(message):
 
 
 if __name__ == "__main__":
+    f = open("../data/data.json", mode='r')
+    json_data = json.load(f)
+
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+
+    lis = []
+    ks = json_data.keys()
+    for k in ks:
+        lis.append(k)
+        print(k)
+    print(str(lis[0]))
     # show the post with the given id, the id is an integer
-    path = "/SHARE/2018-12-01_08_20_40.920411.mp4"
+    path = "/SHARE/"+lis[0]
     md, res = dbx.files_download(path)
-    out = open("../static/2018-12-01_08_20_40.920411.mp4", 'wb')
+    out = open("../static/"+lis[0], 'wb')
     out.write(res.content)
     out.close()
-    # dbx.files_download_to_file(j, '/' + j)
+
