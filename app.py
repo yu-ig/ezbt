@@ -157,7 +157,7 @@ def post(post_text):
 
 
 
-    # return str(t[0]+" "+t[1] + " " +t[2])
+    return str(t[0]+" "+t[1] + " " +t[2])
 
 
 # @app.route('/post/<string:post_id>')
