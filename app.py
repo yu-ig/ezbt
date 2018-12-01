@@ -51,13 +51,7 @@ def index():
     # ココ重要！！
     # インデントありで表示
     # print("{}".format(json.dumps(json_data, indent=4)))
-    f.close()
-    for t in json_data:
-        print(t)
-        path = "/SHARE/" + t
-        md, res = dbx.files_download(path)
-        out = open("static/" + t, 'wb')
-        out.write(res.content)
+
 
     # result = dbx.sharing_get_shared_link_file('https://www.dropbox.com/home/%E3%82%A2%E3%83%97%E3%83%AA/LDH/SHARE/00.mp4')
     return "REX THE LIVE!!!"
