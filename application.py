@@ -28,7 +28,7 @@ CHANNEL_ACCESS_TOKEN = "s+twVpc3vWjdE5t0A1yozYeboN3xytQyb+eVJr3yAmsvYiQoxyaR2Msn
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
-app = Flask("__name__")
+application = Flask("__name__")
 
 logger = logging.getLogger()
 logger.setLevel(logging.ERROR)
@@ -43,7 +43,7 @@ dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 #dbx.users_get_current_account()
 
 
-@app.route('/')
+@application.route('/')
 def index():
     f = open("data/data.json", mode='r')
     json_data = json.load(f)
@@ -59,7 +59,7 @@ def index():
 
 
 
-@app.route("/callback", methods=['POST'])
+@application.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
@@ -125,7 +125,7 @@ def handle_message(event):
 '''
  JSON add id  [id, DL, PW]
 '''
-@app.route('/post/<string:post_text>')
+@application.route('/post/<string:post_text>')
 def post(post_text):
     # show the post with the given id, the id is an integer
     t = post_text.split(',')
@@ -171,7 +171,7 @@ def post(post_text):
 #
 #     return w
 
-@app.route('/get/')
+@application.route('/get/')
 def getJson():
     f = open("data/data.json", mode='r')
     json_data = json.load(f)
@@ -189,7 +189,7 @@ def getJson():
     return json.dumps(json_data)
 
 
-@app.route('/getDebug/')
+@application.route('/getDebug/')
 def getDebug():
     f = open("data/data.json", mode='r')
     json_data = json.load(f)
@@ -209,7 +209,7 @@ def getDebug():
 
     return tmp
 
-@app.route('/getFiles/')
+@application.route('/getFiles/')
 def getFiles():
     fs = glob2.glob("static/*.mp4")
     t = ""
@@ -222,4 +222,4 @@ if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
     # post(1,"000000", "jijsdiaji")
     port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    application.run(host="0.0.0.0", port=port, debug=True)
