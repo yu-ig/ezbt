@@ -45,8 +45,8 @@ dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
 
 @application.route('/')
 def index():
-    f = open("data/data.json", mode='r')
-    json_data = json.load(f)
+    # f = open("data/data.json", mode='r')
+    # json_data = json.load(f)
 
     # ココ重要！！
     # インデントありで表示
@@ -66,7 +66,7 @@ def callback():
 
     # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+    application.logger.info("Request body: " + body)
 
     # handle webhook body
     try:
@@ -221,5 +221,6 @@ def getFiles():
 if __name__ == "__main__":
     # 環境変数をゲット　なければセット　
     # post(1,"000000", "jijsdiaji")
-    port = int(os.getenv("PORT", 5000))
-    application.run(host="0.0.0.0", port=port, debug=True)
+    # port = int(os.getenv("PORT", 5000))
+    # application.run(host="0.0.0.0", port=port, debug=True)
+    application.run()
