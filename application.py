@@ -17,45 +17,31 @@ import json
 import urllib
 import glob2
 
-# 合言葉 dictionary
-dict = {}    # {"WATCHWORD":"URL"}
+
+application = Flask(__name__)
 
 
-
-CHANNEL_SECRET = "73b66d519d69ee046316e77735e6e0a4"
-CHANNEL_ACCESS_TOKEN = "s+twVpc3vWjdE5t0A1yozYeboN3xytQyb+eVJr3yAmsvYiQoxyaR2MsnBkru5J1mwXIrCR2z128PXC6OLKtTrUtpC9FwZrlLfrEdWF/9vAsXa1N26aUB2BU58OiCzAyCqtMJlOPzZNwO5j69+Sx9rAdB04t89/1O/w1cDnyilFU="
+CHANNEL_SECRET = "b62983e501542254d522c7ab6472ee53"
+CHANNEL_ACCESS_TOKEN = "4CfX8hrXiTkamU1tz2xI/G3wbHbpN9qegFJxBs6+/1LVnXgF/a/qMLoyIqMeq89IwXIrCR2z128PXC6OLKtTrUtpC9FwZrlLfrEdWF/9vAttETQ6CaDSzJoKXsjOj76i8ad0DUqd8R1pCNGbtJitygdB04t89/1O/w1cDnyilFU="
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
-application = Flask("__name__")
 
-logger = logging.getLogger()
-logger.setLevel(logging.ERROR)
-
-
-#
 DROPBOX_APP_KEY = "eqdo0y9azq27imf"
 DROPBOX_APP_SECRET = "1k04vbqlsuxv4dt"
 DROPBOX_ACCESS_TOKEN = "4c0XTxvPmbAAAAAAAABrzS3I8NhjijADE7JPcUGZ2ycMO9K4yyQflLkoahUF5JNR"
 
 dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
-#dbx.users_get_current_account()
 
 
-@application.route('/')
+
+
+
+@application.route("/")
 def index():
-    # f = open("data/data.json", mode='r')
-    # json_data = json.load(f)
 
-    # ココ重要！！
-    # インデントありで表示
-    # print("{}".format(json.dumps(json_data, indent=4)))
-
-
-    # result = dbx.sharing_get_shared_link_file('https://www.dropbox.com/home/%E3%82%A2%E3%83%97%E3%83%AA/LDH/SHARE/00.mp4')
-    return "REX THE LIVE!!!"
-
+    return "Hello world"
 
 
 
@@ -77,54 +63,76 @@ def callback():
     return 'OK'
 
 
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    with open('data/data.json','r') as f:
-        dict = json.load(f)
-
-    tmp = dict
-
-    # 暗号と照合..................
-    ww = event.message.text
-    flag = False
+    # with open('data/data.json','r') as f:
+    #     dict = json.load(f)
+    #
+    # tmp = dict
+    #
+    # # 暗号と照合..................
+    # ww = event.message.text
+    # flag = False
     dlfile = ""
-    for t in dict:
-        if dict[t]['PW'] == ww:
-            dlfile = t
-            flag = True
+    # for t in dict:
+    #     if dict[t]['PW'] == ww:
+    #         dlfile = t
+    #         flag = True
+    #
+    # if flag:
+    #     messages = []
+    #     messages.append(TextSendMessage(text='SUCCESS'))
+    #     # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
+    #     # m = TextSendMessage(text=str(result))
+    #     # messages.append(m)
+    #
+    #
+    #     # url = 'https://github.com/yu-ig/ezbt'
+    #     vm = VideoSendMessage(
+    #         original_content_url="https://damp-sands-30274.herokuapp.com/static/"+dlfile,
+    #         preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
+    #     )
+    #     # messages.append(vm)
+    #
+    #     ###############################################################
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         messages
+    #     )
+    #     # os.remove(out)
+    #
+    # else:
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
+    #     )
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="SUCCESS!!")
+    )
 
-    if flag:
-        messages = []
-        messages.append(TextSendMessage(text='SUCCESS'))
-        # result = dbx.files_get_temporary_link('/SHARE/' + dict[ww])
-        # m = TextSendMessage(text=str(result))
-        # messages.append(m)
 
 
-        # url = 'https://github.com/yu-ig/ezbt'
-        vm = VideoSendMessage(
-            original_content_url="https://damp-sands-30274.herokuapp.com/static/"+dlfile,
-            preview_image_url="https://damp-sands-30274.herokuapp.com/static/0.jpg"
-        )
-        messages.append(vm)
+@application.route('/get/')
+def getJson():
+    f = open("data/data.json", mode='r')
+    json_data = json.load(f)
 
-        ###############################################################
-        line_bot_api.reply_message(
-            event.reply_token,
-            messages
-        )
-        # os.remove(out)
+    # ココ重要！！
+    # インデントありで表示
+    # print("{}".format(json.dumps(json_data, indent=4)))
+    f.close()
+    for t in json_data:
+        path = "/SHARE/" + t
+        md, res = dbx.files_download(path)
+        out = open("static/" + t, 'wb')
+        out.write(res.content)
 
-    else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text + "?\n合言葉が違うよ。")
-        )
+    return json.dumps(json_data)
 
 
-'''
- JSON add id  [id, DL, PW]
-'''
+
 @application.route('/post/<string:post_text>')
 def post(post_text):
     # show the post with the given id, the id is an integer
@@ -154,39 +162,12 @@ def post(post_text):
     md, res = dbx.files_download(path)
     out = open("static/"+t[0], 'wb')
     out.write(res.content)
+    out.close()
 
 
 
     return str(t[0]+" "+t[1] + " " +t[2])
 
-
-# @app.route('/post/<string:post_id>')
-# def show_post(post_id):
-#     # show the post with the given id, the id is an integer
-#     t = post_id.split(',')
-#
-#     w =""
-#     for tmp in t :
-#         w += tmp
-#
-#     return w
-
-@application.route('/get/')
-def getJson():
-    f = open("data/data.json", mode='r')
-    json_data = json.load(f)
-
-    # ココ重要！！
-    # インデントありで表示
-    # print("{}".format(json.dumps(json_data, indent=4)))
-    f.close()
-    for t in json_data:
-        path = "/SHARE/" + t
-        md, res = dbx.files_download(path)
-        out = open("static/" + t, 'wb')
-        out.write(res.content)
-
-    return json.dumps(json_data)
 
 
 @application.route('/getDebug/')
@@ -218,9 +199,7 @@ def getFiles():
 
     return t
 
+
 if __name__ == "__main__":
-    # 環境変数をゲット　なければセット　
-    # post(1,"000000", "jijsdiaji")
-    # port = int(os.getenv("PORT", 5000))
-    # application.run(host="0.0.0.0", port=port, debug=True)
+    application.debug = True
     application.run()
