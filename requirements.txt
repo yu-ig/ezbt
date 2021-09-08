@@ -43,7 +43,7 @@ numpy==1.15.4
 oauthlib==2.1.0
 opencv-python==3.4.4.19
 pathspec==0.5.5
-Pillow==5.3.0
+Pillow==8.3.2
 pyasn1==0.4.4
 python-dateutil==2.7.5
 python-magic==0.4.15
